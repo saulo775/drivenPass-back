@@ -32,7 +32,7 @@ model Credentials {
   userId   Int
   user     Users  @relation(fields: [userId], references: [id])
 
-  @@unique([id, title])
+  @@unique([userId, title])
   @@map("credentials")
 }
 
@@ -43,7 +43,7 @@ model Notes {
   userId     Int
   user       Users  @relation(fields: [userId], references: [id])
 
-  @@unique([id, title])
+  @@unique([userId, title])
   @@map("securityNotes")
 }
 
@@ -60,7 +60,7 @@ model Cards {
   userId         Int
   user           Users   @relation(fields: [userId], references: [id])
 
-  @@unique([id, title])
+  @@unique([userId, title])
   @@map("cards")
 }
 
@@ -72,7 +72,7 @@ model Wifi {
   userId      Int
   user        Users  @relation(fields: [userId], references: [id])
 
-  @@unique([id, title])
+  @@unique([userId, title])
   @@map("wifi")
 }
 

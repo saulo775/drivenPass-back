@@ -26,5 +26,4 @@ const authRepository = {
     insertUser,
     insertSession
 }
-
 export default authRepository;
