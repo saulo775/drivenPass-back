@@ -1,4 +1,4 @@
-import { ICreateUserData } from './../services/authService';
+import { ICreateUserData, ICreateSessionData } from './../services/authService';
 import prisma from "../config/database.js";
 
 async function findUserByEmail(email: string) {
@@ -14,9 +14,17 @@ async function insertUser(createUserData: ICreateUserData){
     return;
 }
 
+async function insertSession(userId: ICreateSessionData) {
+    const {id} = await prisma.sessions.create({
+        data: userId
+    });
+    return id
+}
+
 const authRepository = {
     findUserByEmail,
-    insertUser
+    insertUser,
+    insertSession
 }
 
 export default authRepository;

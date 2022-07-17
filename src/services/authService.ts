@@ -1,9 +1,11 @@
-import { Users } from "@prisma/client";
+import { Sessions, Users } from "@prisma/client";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import { AppError } from "../errors/AppError.js";
 import authRepository from "../repositories/authRepository.js";
 
 export type ICreateUserData = Omit<Users, "id">
+export type ICreateSessionData = Omit<Sessions, "id">
 
 async function createNewUser({ email, password }: ICreateUserData) {    
     await checkIfUserAlreadyExists(email);
@@ -14,6 +16,17 @@ async function createNewUser({ email, password }: ICreateUserData) {
     }
 
     await authRepository.insertUser(data);
+}
+
+async function createNewSession(loginUserData: ICreateUserData){
+    const user = await checkIfCredentialsAreValid(loginUserData);
+    const sessionData: ICreateSessionData= {
+        userId: user.id
+    }
+    const sessionId = await authRepository.insertSession(sessionData);
+    const token = await generateToken(sessionId);
+
+    return token;
 }
 
 async function checkIfUserAlreadyExists(email: string) {
@@ -28,8 +41,29 @@ async function encryptPassword(password: string) {
     return encPassword;
 }
 
+async function checkIfCredentialsAreValid({email, password}: ICreateUserData){
+    const user = await authRepository.findUserByEmail(email);
+    const passwordCompare = await bcrypt.compare(password, user.password);
+
+    if (!user || !passwordCompare) {
+        throw new AppError("email or password incorrect", 401);
+    }
+    
+    return user;
+}
+
+async function generateToken(sessionId: Number) {
+    const data = {sessionId};
+    const secretKey = process.env.JWT_SECRET;
+    const config = {expiresIn: process.env.JWT_EXPIRATION || '1d'};
+
+    const token = jwt.sign(data, secretKey, config);
+    return token;
+}
+
 const authService = {
     createNewUser,
+    createNewSession,
 }
 
 export default authService;

@@ -17,8 +17,8 @@ model Users {
   credentials Credentials[]
   notes       Notes[]
   cards       Cards[]
-  wifi  Wifi[]
-  sessions  Sessions[]
+  wifi        Wifi[]
+  sessions    Sessions[]
 
   @@map("users")
 }
@@ -30,7 +30,7 @@ model Credentials {
   username String
   password String
   userId   Int
-  user    Users  @relation(fields: [userId], references: [id])
+  user     Users  @relation(fields: [userId], references: [id])
 
   @@unique([id, title])
   @@map("credentials")
@@ -41,7 +41,7 @@ model Notes {
   title      String @db.VarChar(50)
   annotation String @db.VarChar(1000)
   userId     Int
-  user      Users  @relation(fields: [userId], references: [id])
+  user       Users  @relation(fields: [userId], references: [id])
 
   @@unique([id, title])
   @@map("securityNotes")
@@ -65,21 +65,21 @@ model Cards {
 }
 
 model Wifi {
-  id Int @id @default(autoincrement())
-  title String  
+  id          Int    @id @default(autoincrement())
+  title       String
   networkName String
-  password String 
-  userId  Int
-  user Users @relation(fields: [userId], references: [id])
+  password    String
+  userId      Int
+  user        Users  @relation(fields: [userId], references: [id])
 
   @@unique([id, title])
   @@map("wifi")
 }
 
 model Sessions {
-  id   Int @id @default(autoincrement())
-  userId Int
-  user Users @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      Users    @relation(fields: [userId], references: [id])
 
   @@map("sessions")
 }
