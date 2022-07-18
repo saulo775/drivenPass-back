@@ -25,3 +25,14 @@ export async function selectNotes(req: Request, res: Response) {
         return res.send(allNotes);
     }
 }
+
+export async function removeNotes(req: Request, res: Response) {
+    const { noteId } = req.params;
+    if (!noteId) {
+        throw new AppError("NoteId not found", 403);
+    }
+    const userId = res.locals.userId;
+    await notesService.deleteNote(+noteId, userId);
+
+    return res.sendStatus(200);
+}

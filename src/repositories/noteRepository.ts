@@ -40,19 +40,20 @@ async function findAll(userId:number) {
     return notes;
 }
 
-// async function removeById(noteId: number) {
-//     await prisma.notes.delete({
-//         where: {
-//             id: noteId,
-//         }
-//     })
-// }
+async function removeById(noteId: number) {
+    await prisma.notes.delete({
+        where: {
+            id: noteId,
+        }
+    })
+}
 
 const noteRepository = {
     findByType,
     insertNote,
     findById,
     findAll,
+    removeById
 }
 
 export default noteRepository;

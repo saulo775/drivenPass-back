@@ -40,23 +40,24 @@ async function allNotes(userId: number){
     return notes;
 }
 
-// async function deleteNote(credentialId: number, userId: number) {
-//     const credential = await credentialRepository.findById(credentialId);
-//     if (!credential) {
-//         throw new AppError("Note not found", 404);
-//     }
+async function deleteNote(noteId: number, userId: number) {
+    const note = await noteRepository.findById(noteId);
+    if (!note) {
+        throw new AppError("Note not found", 404);
+    }
 
-//     if (credential.userId !== userId) {
-//         throw new AppError("Note is not this user", 403);
-//     }
+    if (note.userId !== userId) {
+        throw new AppError("Note is not this user", 403);
+    }
 
-//     await credentialRepository.removeById(credentialId);
-// }
+    await noteRepository.removeById(noteId);
+}
 
 const notesService = {
     createNewNote,
     oneNote,
-    allNotes
+    allNotes,
+    deleteNote
 }
 
 export default notesService
