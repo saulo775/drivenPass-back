@@ -8,7 +8,7 @@ const credentialSchema = Joi.object<ICreateCredentialData>({
     title: Joi.string().required(),
     url: Joi.string().pattern(URL_REGEX).required(),
     username: Joi.string().required(),
-    password: Joi.string().min(10).required(),
+    password: Joi.string().required(),
 });
 
 export default credentialSchema;
