@@ -45,24 +45,24 @@ async function allWifis(userId: number){
     return wifis;
 }
 
-// async function deleteWifi(wifiId: number, userId: number) {
-//     const wifi = await wifiRepository.findById(wifiId);
-//     if (!wifi) {
-//         throw new AppError("Wifi not found", 404);
-//     }
+async function deleteWifi(wifiId: number, userId: number) {
+    const wifi = await wifiRepository.findById(wifiId);
+    if (!wifi) {
+        throw new AppError("Wifi not found", 404);
+    }
     
-//     if (wifi.userId !== userId) {
-//         throw new AppError("Wifi is not this user", 403);
-//     }
+    if (wifi.userId !== userId) {
+        throw new AppError("Wifi is not this user", 403);
+    }
 
-//     await wifiRepository.removeById(wifiId);
-// }
+    await wifiRepository.removeById(wifiId);
+}
 
 const wifiService = {
     createNewWifi,
     oneWifi,
     allWifis,
-    // deleteWifi
+    deleteWifi
 }
 
 export default wifiService

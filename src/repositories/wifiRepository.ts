@@ -40,20 +40,20 @@ async function findAll(userId:number) {
     return wifis;
 }
 
-// async function removeById(wifiId: number) {
-//     await prisma.wifi.delete({
-//         where: {
-//             id: wifiId,
-//         }
-//     })
-// }
+async function removeById(wifiId: number) {
+    await prisma.wifi.delete({
+        where: {
+            id: wifiId,
+        }
+    })
+}
 
 const wifiRepository = {
     findByType,
     insertWifi,
     findById,
     findAll,
-    // removeById
+    removeById
 }
 
 export default wifiRepository;

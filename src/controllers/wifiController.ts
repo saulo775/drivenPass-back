@@ -27,13 +27,13 @@ export async function selectWifis(req: Request, res: Response) {
     }
 }
 
-// export async function removeWifis(req: Request, res: Response) {
-//     const { wifiId } = req.params;
-//     if (!wifiId) {
-//         throw new AppError("WifiId not found", 403);
-//     }
-//     const userId = res.locals.userId;
-//     await wifiService.deleteWifi(+wifiId, userId);
+export async function removeWifis(req: Request, res: Response) {
+    const { wifiId } = req.params;
+    if (!wifiId) {
+        throw new AppError("WifiId not found", 403);
+    }
+    const userId = res.locals.userId;
+    await wifiService.deleteWifi(+wifiId, userId);
 
-//     return res.sendStatus(200);
-// }
+    return res.sendStatus(200);
+}

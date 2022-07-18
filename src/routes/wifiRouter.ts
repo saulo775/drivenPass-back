@@ -2,7 +2,7 @@ import { Router } from "express";
 import { 
     createWifi, 
     selectWifis, 
-    // removeWifis 
+    removeWifis 
 } from "../controllers/wifiController.js";
 import { validateToken } from "../middlewares/authMiddleware.js";
 import { validatWifiData } from "../middlewares/wifiMiddleware.js"
@@ -12,6 +12,6 @@ wifiRouter.use(validateToken);
 
 wifiRouter.post("/wifi", validatWifiData, createWifi)
 wifiRouter.get("/wifi", selectWifis);
-// wifiRouter.delete("/wifi/:wifiId", removeWifis);
+wifiRouter.delete("/wifi/:wifiId", removeWifis);
 
 export default wifiRouter;
