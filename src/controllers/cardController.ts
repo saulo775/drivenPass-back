@@ -27,13 +27,13 @@ export async function selectCards(req: Request, res: Response) {
     }
 }
 
-// export async function removeCards(req: Request, res: Response) {
-//     const { cardId } = req.params;
-//     if (!cardId) {
-//         throw new AppError("CardId not found", 403);
-//     }
-//     const userId = res.locals.userId;
-//     await cardService.deleteCard(+cardId, userId);
+export async function removeCards(req: Request, res: Response) {
+    const { cardId } = req.params;
+    if (!cardId) {
+        throw new AppError("CardId not found", 403);
+    }
+    const userId = res.locals.userId;
+    await cardService.deleteCard(+cardId, userId);
 
-//     return res.sendStatus(200);
-// }
+    return res.sendStatus(200);
+}

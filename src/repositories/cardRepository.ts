@@ -40,20 +40,20 @@ async function findAll(userId:number) {
     return cards;
 }
 
-// async function removeById(cardId: number) {
-//     await prisma.cards.delete({
-//         where: {
-//             id: cardId,
-//         }
-//     })
-// }
+async function removeById(cardId: number) {
+    await prisma.cards.delete({
+        where: {
+            id: cardId,
+        }
+    })
+}
 
 const cardRepository = {
     findByType,
     insertCard,
     findById,
     findAll,
-    // removeById
+    removeById
 }
 
 export default cardRepository;

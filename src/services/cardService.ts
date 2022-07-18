@@ -45,24 +45,24 @@ async function allCards(userId: number){
     return cards;
 }
 
-// async function deleteCard(cardId: number, userId: number) {
-//     const card = await cardRepository.findById(cardId);
-//     if (!card) {
-//         throw new AppError("Card not found", 404);
-//     }
+async function deleteCard(cardId: number, userId: number) {
+    const card = await cardRepository.findById(cardId);
+    if (!card) {
+        throw new AppError("Card not found", 404);
+    }
     
-//     if (card.userId !== userId) {
-//         throw new AppError("Card is not this user", 403);
-//     }
+    if (card.userId !== userId) {
+        throw new AppError("Card is not this user", 403);
+    }
 
-//     await cardRepository.removeById(cardId);
-// }
+    await cardRepository.removeById(cardId);
+}
 
 const cardService = {
     createNewCard,
     oneCard,
     allCards,
-    // deleteCard
+    deleteCard
 }
 
 export default cardService
