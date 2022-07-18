@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../errors/AppError.js";
 import credentialService from "../services/credentialService.js";
 import { ICreateCredentialData } from "../services/credentialService.js";
 
@@ -24,4 +25,15 @@ export async function selectCredentials(req: Request, res: Response) {
         const allCredentials = await credentialService.allCredentials(userId);
         return res.send(allCredentials);
     }
+}
+
+export async function removeCredentials(req: Request, res: Response) {
+    const { credentialId } = req.params;
+    if (!credentialId) {
+        throw new AppError("CredentialId not found", 403);
+    }
+    const userId = res.locals.userId;
+    await credentialService.deleteCredential(+credentialId, userId);
+
+    return res.sendStatus(200);
 }

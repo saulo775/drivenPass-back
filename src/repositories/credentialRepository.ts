@@ -40,11 +40,20 @@ async function findAll(userId:number) {
     return credentials;
 }
 
+async function removeById(credentialId: number) {
+    await prisma.credentials.delete({
+        where: {
+            id: credentialId,
+        }
+    })
+}
+
 const credentialRepository = {
     findByType,
     insertCredential,
     findById,
-    findAll
+    findAll,
+    removeById
 }
 
 export default credentialRepository;

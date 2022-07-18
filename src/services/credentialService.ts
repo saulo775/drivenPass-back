@@ -45,11 +45,24 @@ async function allCredentials(userId: number){
     return credentials;
 }
 
+async function deleteCredential(credentialId: number, userId: number) {
+    const credential = await credentialRepository.findById(credentialId);
+    if (!credential) {
+        throw new AppError("Credential not found", 404);
+    }
+    
+    if (credential.userId !== userId) {
+        throw new AppError("Credential is not this user", 403);
+    }
+
+    await credentialRepository.removeById(credentialId);
+}
 
 const credentialService = {
     createNewCredential,
     oneCredential,
     allCredentials,
+    deleteCredential
 }
 
 export default credentialService
