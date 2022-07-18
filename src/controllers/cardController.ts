@@ -14,18 +14,18 @@ export async function createCard(req: Request, res: Response) {
     res.status(201).send(card)
 }
 
-// export async function selectCards(req: Request, res: Response) {
-//     const { cardId } = req.query;
-//     const userId = res.locals.userId;
+export async function selectCards(req: Request, res: Response) {
+    const { cardId } = req.query;
+    const userId = res.locals.userId;
 
-//     if (cardId) {
-//         const uniqueCard = await cardService.oneCard(+cardId, userId)
-//         return res.status(200).json(uniqueCard);
-//     }else{
-//         const allCards = await cardService.allCards(userId);
-//         return res.send(allCards);
-//     }
-// }
+    if (cardId) {
+        const uniqueCard = await cardService.oneCard(+cardId, userId)
+        return res.status(200).json(uniqueCard);
+    }else{
+        const allCards = await cardService.allCards(userId);
+        return res.send(allCards);
+    }
+}
 
 // export async function removeCards(req: Request, res: Response) {
 //     const { cardId } = req.params;

@@ -23,27 +23,27 @@ async function checkIfCanSaveCard(title: string, userId: number) {
     }
 }
 
-// async function oneCard(cardId: number, userId: number){
-//     const card = await cardRepository.findById(cardId);
-//     if (!card) {
-//         throw new AppError("Card not found", 404);
-//     }
+async function oneCard(cardId: number, userId: number){
+    const card = await cardRepository.findById(cardId);
+    if (!card) {
+        throw new AppError("Card not found", 404);
+    }
 
-//     if (card.userId !== userId) {
-//         throw new AppError("This card is not yours", 403);
-//     }
+    if (card.userId !== userId) {
+        throw new AppError("This card is not yours", 403);
+    }
 
-//     card.password = await decryptPassword(card.password);
-//     return card;
-// }
+    card.password = await decryptPassword(card.password);
+    return card;
+}
 
-// async function allCards(userId: number){
-//     const cards = await cardRepository.findAll(userId);
-//     if (!cards) {
-//         throw new AppError("Card not found", 404);
-//     }
-//     return cards;
-// }
+async function allCards(userId: number){
+    const cards = await cardRepository.findAll(userId);
+    if (!cards) {
+        throw new AppError("Card not found", 404);
+    }
+    return cards;
+}
 
 // async function deleteCard(cardId: number, userId: number) {
 //     const card = await cardRepository.findById(cardId);
@@ -60,8 +60,8 @@ async function checkIfCanSaveCard(title: string, userId: number) {
 
 const cardService = {
     createNewCard,
-    // oneCard,
-    // allCards,
+    oneCard,
+    allCards,
     // deleteCard
 }
 
