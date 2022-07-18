@@ -20,25 +20,25 @@ async function insertWifi(wifiData: ICreateWifiData) {
     return wifi;
 }
 
-// async function findById(wifiId: number) {
-//     const wifi = await prisma.wifi.findUnique({
-//         where: {
-//             id: wifiId,
-//         }
-//     });
+async function findById(wifiId: number) {
+    const wifi = await prisma.wifi.findUnique({
+        where: {
+            id: wifiId,
+        }
+    });
 
-//     return wifi;
-// }
+    return wifi;
+}
 
-// async function findAll(userId:number) {
-//     const wifis = await prisma.wifi.findMany({
-//         where: {
-//             userId: userId
-//         }
-//     });
+async function findAll(userId:number) {
+    const wifis = await prisma.wifi.findMany({
+        where: {
+            userId: userId
+        }
+    });
     
-//     return wifis;
-// }
+    return wifis;
+}
 
 // async function removeById(wifiId: number) {
 //     await prisma.wifi.delete({
@@ -51,8 +51,8 @@ async function insertWifi(wifiData: ICreateWifiData) {
 const wifiRepository = {
     findByType,
     insertWifi,
-    // findById,
-    // findAll,
+    findById,
+    findAll,
     // removeById
 }
 

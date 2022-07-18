@@ -14,18 +14,18 @@ export async function createWifi(req: Request, res: Response) {
     res.status(201).send(wifi)
 }
 
-// export async function selectWifis(req: Request, res: Response) {
-//     const { wifiId } = req.query;
-//     const userId = res.locals.userId;
+export async function selectWifis(req: Request, res: Response) {
+    const { wifiId } = req.query;
+    const userId = res.locals.userId;
 
-//     if (wifiId) {
-//         const uniqueWifi = await wifiService.oneWifi(+wifiId, userId)
-//         return res.status(200).json(uniqueWifi);
-//     }else{
-//         const allWifis = await wifiService.allWifis(userId);
-//         return res.send(allWifis);
-//     }
-// }
+    if (wifiId) {
+        const uniqueWifi = await wifiService.oneWifi(+wifiId, userId)
+        return res.status(200).json(uniqueWifi);
+    }else{
+        const allWifis = await wifiService.allWifis(userId);
+        return res.send(allWifis);
+    }
+}
 
 // export async function removeWifis(req: Request, res: Response) {
 //     const { wifiId } = req.params;

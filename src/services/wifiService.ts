@@ -23,27 +23,27 @@ async function checkIfCanSaveWifi(title: string, userId: number) {
     }
 }
 
-// async function oneWifi(wifiId: number, userId: number){
-//     const wifi = await wifiRepository.findById(wifiId);
-//     if (!wifi) {
-//         throw new AppError("Wifi not found", 404);
-//     }
+async function oneWifi(wifiId: number, userId: number){
+    const wifi = await wifiRepository.findById(wifiId);
+    if (!wifi) {
+        throw new AppError("Wifi not found", 404);
+    }
 
-//     if (wifi.userId !== userId) {
-//         throw new AppError("This wifi is not yours", 403);
-//     }
+    if (wifi.userId !== userId) {
+        throw new AppError("This wifi is not yours", 403);
+    }
 
-//     wifi.password = await decryptPassword(wifi.password);
-//     return wifi;
-// }
+    wifi.password = await decryptPassword(wifi.password);
+    return wifi;
+}
 
-// async function allWifis(userId: number){
-//     const wifis = await wifiRepository.findAll(userId);
-//     if (!wifis) {
-//         throw new AppError("Wifi not found", 404);
-//     }
-//     return wifis;
-// }
+async function allWifis(userId: number){
+    const wifis = await wifiRepository.findAll(userId);
+    if (!wifis) {
+        throw new AppError("Wifi not found", 404);
+    }
+    return wifis;
+}
 
 // async function deleteWifi(wifiId: number, userId: number) {
 //     const wifi = await wifiRepository.findById(wifiId);
@@ -60,8 +60,8 @@ async function checkIfCanSaveWifi(title: string, userId: number) {
 
 const wifiService = {
     createNewWifi,
-    // oneWifi,
-    // allWifis,
+    oneWifi,
+    allWifis,
     // deleteWifi
 }
 
