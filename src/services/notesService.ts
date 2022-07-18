@@ -19,43 +19,44 @@ async function checkIfCanSaveNote(title: string, userId: number) {
     }
 }
 
-// async function oneCredential(credentialId: number, userId: number){
+async function oneNote(noteId: number, userId: number){
+    const note = await noteRepository.findById(noteId);
+    if (!note) {
+        throw new AppError("Note not found", 404);
+    }
+
+    if (note.userId !== userId) {
+        throw new AppError("This note is not yours", 403);
+    }
+
+    return note;
+}
+
+async function allNotes(userId: number){
+    const notes = await noteRepository.findAll(userId);
+    if (!notes) {
+        throw new AppError("Note not found", 404);
+    }
+    return notes;
+}
+
+// async function deleteNote(credentialId: number, userId: number) {
 //     const credential = await credentialRepository.findById(credentialId);
 //     if (!credential) {
-//         throw new AppError("Credential not found", 404);
+//         throw new AppError("Note not found", 404);
 //     }
 
 //     if (credential.userId !== userId) {
-//         throw new AppError("This credential is not yours", 403);
-//     }
-
-//     credential.password = await decryptPassword(credential.password);
-//     return credential;
-// }
-
-// async function allCredentials(userId: number){
-//     const credentials = await credentialRepository.findAll(userId);
-//     if (!credentials) {
-//         throw new AppError("Credential not found", 404);
-//     }
-//     return credentials;
-// }
-
-// async function deleteCredential(credentialId: number, userId: number) {
-//     const credential = await credentialRepository.findById(credentialId);
-//     if (!credential) {
-//         throw new AppError("Credential not found", 404);
-//     }
-
-//     if (credential.userId !== userId) {
-//         throw new AppError("Credential is not this user", 403);
+//         throw new AppError("Note is not this user", 403);
 //     }
 
 //     await credentialRepository.removeById(credentialId);
 // }
 
 const notesService = {
-    createNewNote
+    createNewNote,
+    oneNote,
+    allNotes
 }
 
 export default notesService

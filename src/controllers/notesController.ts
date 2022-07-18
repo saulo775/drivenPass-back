@@ -12,3 +12,16 @@ export async function createNotes(req: Request, res: Response) {
 
     return res.sendStatus(201);
 }
+
+export async function selectNotes(req: Request, res: Response) {
+    const { noteId } = req.query;
+    const userId = res.locals.userId;
+
+    if (noteId) {
+        const uniqueNote = await notesService.oneNote(+noteId, userId)
+        return res.status(200).json(uniqueNote);
+    }else{
+        const allNotes = await notesService.allNotes(userId);
+        return res.send(allNotes);
+    }
+}

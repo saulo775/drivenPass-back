@@ -20,30 +20,30 @@ async function insertNote(noteData: ICreateNotesData) {
     return note;
 }
 
-// async function findById(credentialId: number) {
-//     const credential = await prisma.credentials.findUnique({
-//         where: {
-//             id: credentialId,
-//         }
-//     });
+async function findById(noteId: number) {
+    const note = await prisma.notes.findUnique({
+        where: {
+            id: noteId,
+        }
+    });
 
-//     return credential;
-// }
+    return note;
+}
 
-// async function findAll(userId:number) {
-//     const credentials = await prisma.credentials.findMany({
-//         where: {
-//             userId: userId
-//         }
-//     });
+async function findAll(userId:number) {
+    const notes = await prisma.notes.findMany({
+        where: {
+            userId: userId
+        }
+    });
     
-//     return credentials;
-// }
+    return notes;
+}
 
-// async function removeById(credentialId: number) {
-//     await prisma.credentials.delete({
+// async function removeById(noteId: number) {
+//     await prisma.notes.delete({
 //         where: {
-//             id: credentialId,
+//             id: noteId,
 //         }
 //     })
 // }
@@ -51,6 +51,8 @@ async function insertNote(noteData: ICreateNotesData) {
 const noteRepository = {
     findByType,
     insertNote,
+    findById,
+    findAll,
 }
 
 export default noteRepository;
