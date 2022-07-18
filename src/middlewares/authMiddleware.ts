@@ -13,13 +13,12 @@ export function validateAuthData(req: Request, res: Response, next: NextFunction
 
 export async function validateToken(req: Request, res: Response, next: NextFunction) {
     const Authorization = req.headers['authorization'];
-    const secretKey = process.env.JWT_SECRET;
-    const token = Authorization.replace("Bearer", "").trim();
-    
     if (!Authorization) {
         throw new AppError("Token is missing", 404);
     }
-
+    const secretKey = process.env.JWT_SECRET;
+    const token = Authorization.replace("Bearer", "").trim();
+    
     let data
     try {
         data = jwt.verify(token, secretKey);

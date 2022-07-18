@@ -3,14 +3,13 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { AppError } from "../errors/AppError.js";
 import authRepository from "../repositories/authRepository.js";
-import { encryptPassword } from "../utils/encryptPassword.js";
 
 export type ICreateUserData = Omit<Users, "id">
 export type ICreateSessionData = Omit<Sessions, "id">
 
 async function createNewUser({ email, password }: ICreateUserData) {    
     await checkIfUserAlreadyExists(email);
-    const securityPassword = await encryptPassword(password);
+    const securityPassword = await applicationPassword(password);
     const data: ICreateUserData = {
         email,
         password: securityPassword
@@ -29,6 +28,12 @@ async function createNewSession(loginUserData: ICreateUserData){
 
     return token;
 }
+
+async function applicationPassword(password: string) {
+    const encPassword = await bcrypt.hash(password, +process.env.SALT_ROUNDS);
+    return encPassword;
+}
+
 
 async function checkIfUserAlreadyExists(email: string) {
     const user = await authRepository.findUserByEmail(email);

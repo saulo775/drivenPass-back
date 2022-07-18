@@ -135,6 +135,11 @@
   resolved "https://registry.npmjs.org/@types/cors/-/cors-2.8.12.tgz"
   integrity sha512-vt+kDhq/M2ayberEtJcIN/hxXy1Pk+59g2FV/ZQceeaTyCtCucjL2Q7FXlFjtWn4n15KCr1NE2lNNFhp0lEThw==
 
+"@types/cryptr@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/cryptr/-/cryptr-4.0.1.tgz#d4128be91d1064a2678e695a318b217912881083"
+  integrity sha512-Nn8fvr+8XYWK5h422lj4xQACfOg6vdhKI+Rh9ERa5Mg0cZvPL9Vn3845vSY07dNZnEs5cqkSNVMdhmf70lAYkA==
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.29"
   resolved "https://registry.npmjs.org/@types/express-serve-static-core/-/express-serve-static-core-4.17.29.tgz"
@@ -400,6 +405,11 @@ create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/create-require/-/create-require-1.1.1.tgz"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
+
+cryptr@^6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/cryptr/-/cryptr-6.0.3.tgz#669364e7993a1cd19d77e32e90ffef38455ecd74"
+  integrity sha512-Nhaxn3CYl/OoWF3JSZlF8B6FQO600RRkU3g8213OGEIq4YvMlc3od8hL9chubhY1SmTq8ienvCRq1MSFjMTpOg==
 
 debug@2.6.9:
   version "2.6.9"
